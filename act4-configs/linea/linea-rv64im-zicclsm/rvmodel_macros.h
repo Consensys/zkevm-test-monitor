@@ -36,6 +36,15 @@
 
 #define RVMODEL_MTIMECMP_ADDRESS 0x02000000
 
+// Linea does not implement timer interrupts, but the framework's
+// check_defines.h still requires the macro to be defined.  Use a
+// placeholder value (timer never fires soon).
+#define RVMODEL_TIMER_INT_SOON_DELAY 0
+
+// Linea does not implement external/software interrupts, but the
+// framework's check_defines.h still requires the macro to be defined.
+#define RVMODEL_INTERRUPT_LATENCY 0
+
 #define RVMODEL_SET_MEXT_INT
 
 #define RVMODEL_CLR_MEXT_INT
