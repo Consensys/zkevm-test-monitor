@@ -2,6 +2,10 @@ name: Update ZKVM
 
 on:
   workflow_call:
+    secrets:
+      WIZ_SENSOR_TOKEN:
+        description: "Wiz runner sensor token (single-line JSON). Optional; the sensor is skipped when empty."
+        required: false
     inputs:
       zkvm:
         required: true
@@ -23,6 +27,11 @@ jobs:
     runs-on: ${{ fromJSON(inputs.runner) }}
 
     steps:
+      - name: Wiz sensor
+        uses: Consensys/github-actions/wiz-sensor@c529b19afef5a8e2ff6993638a99a905de633ddb
+        with:
+          enabled: ${{ vars.WIZ_SENSOR_ENABLED }}
+          token: ${{ secrets.WIZ_SENSOR_TOKEN }}
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
